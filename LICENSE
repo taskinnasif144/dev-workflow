@@ -28,3 +28,5 @@ Third-party bundled skills retain their own licenses:
   Copyright (c) Matt Pocock — MIT License
 - frontend-design
   Copyright (c) Anthropic — Apache License 2.0 (see bundle/skills/frontend-design/LICENSE.txt)
+- modern-web-guidance
+  Copyright (c) Google Chrome / modern-web-guidance contributors — Apache License 2.0 (see bundle/skills/modern-web-guidance/LICENSE)

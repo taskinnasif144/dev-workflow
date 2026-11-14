@@ -25,5 +25,6 @@ Review the ticket diff (or full feature diff when asked) against:
 6. Comments on new code: plain, newbie-readable intent+why on non-trivial pieces
 7. Fresh repo: structure/scalability/readability bar. Messy repo: fits existing architecture, no drive-by rewrites of neighbors
 8. UI (if applicable): loading, empty, error, responsive states present
+9. UI (if applicable and `modern-web-guidance` available): spot-check the diff against relevant retrieved guides (modern platform APIs, a11y, performance). Note `MWG unavailable` rather than blocking if offline.
 
 Report findings in severity order (blocker / major / minor / nit) with file:line references. If clean, say **CLEAR** and list what you verified. Do not fix anything. Do not soften blockers.

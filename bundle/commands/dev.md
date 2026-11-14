@@ -21,8 +21,18 @@ You are the orchestrator of a fixed pipeline. Follow the phases in order. Do not
 | Grilling | `grilling`, `wait-what` |
 | Plan loop | `cross-critique` |
 | Ticket slicing | follow `to-tickets` vertical-slice rules, but write files under `docs/tickets/` (see below) |
-| Implement | `tdd`; for UI tickets also `frontend-design`, and `figma-design-to-code` if a Figma URL was given |
-| Final review | `code-review` |
+| Implement | `tdd`; for UI tickets also `frontend-design`, `modern-web-guidance`, and `figma-design-to-code` if a Figma URL was given |
+| Final review | `code-review`; for UI/full-stack also `modern-web-guidance` |
+
+**When scope includes UI** (UI or full-stack): also load `modern-web-guidance` during UI grilling, plan loop, implement, and final review. It teaches the agent to fetch expert web guides on demand:
+
+```bash
+npx modern-web-guidance@latest search "<action query>"
+npx modern-web-guidance@latest retrieve "<guide-id>"
+npx modern-web-guidance@latest legacy-scan .
+```
+
+On Windows use `npx.cmd` if `npx` fails. Network required for guide fetch; if offline, note it in the report and continue without blocking.
 
 ## Phase 0 — Setup (question tool, every run)
 
@@ -54,6 +64,9 @@ Read and understand before asking requirements. Structure later grilling questio
 **Also for `bugfix`:**
 - Locate the failure path; note how to reproduce.
 
+**Also for `modify existing` when scope includes UI:**
+- Run `npx modern-web-guidance@latest legacy-scan .` (or `npx.cmd`) over the UI code in scope; record hits as must-modernize candidates for the plan (not automatic rewrites).
+
 **Also for docs/chores:** confirm what files are in scope.
 
 Banner: `Phase 2/6 — functionality grilling`.
@@ -78,6 +91,7 @@ Deep grilling on: layout, information hierarchy, branding/visual direction, moti
 
 - If the user pastes a Figma URL, load `figma-design-to-code` and treat that URL as source of truth for layout.
 - Load `frontend-design` for aesthetic direction.
+- Load `modern-web-guidance`; when a grilling answer touches motion, a11y, forms, dialogs, performance, or modern CSS/HTML, `search` + `retrieve` the relevant guide and let it shape your questions and restatement.
 - Shape questions with Phase-0 knowledge of existing UI patterns.
 
 Skip this entire phase for backend-only or docs-only runs.
@@ -105,6 +119,8 @@ Banner: `Phase 4/6 — plan loop`.
 5. Fix every leak. If a leak reveals an unclear requirement or missing decision that only the user can settle → **question tool**. Otherwise fix the plan yourself and re-check.
 6. Max **3 leak-fix iterations**. If still leaking on the 4th pass → stop and surface the stuck disagreement via **question tool**.
 7. When clean: write `docs/plans/<feature-slug>.md`, mark plan self-certified, create branch `dev/<feature-slug>` in the primary repo (from current default branch). No push unless the user asks.
+
+**UI/full-stack plans:** load `modern-web-guidance`. Where the plan uses platform APIs (dialog/popover, view transitions, container queries, INP/perf, a11y focus, forms, etc.), `search` + `retrieve` the matching guides and cite guide IDs in the plan. Prefer platform-native solutions over heavy libraries when a guide exists. Include `legacy-scan` hits from Phase-0 as explicit plan steps when run type is `modify existing`.
 
 ### 9-point leak checklist (plan AND tickets)
 
@@ -148,21 +164,23 @@ For each ticket in dependency order (frontier of unblocked tickets, strictly one
    - **Refactors:** existing suite must stay green; no new tests required unless behavior changes.
    - Comments: every non-trivial piece of newly written code gets a plain, newbie-readable comment stating **intent + why**. Match repo style; do not rewrite neighbors in a messy repo.
    - Quality bar: scalable and optimized. Fresh repos: strict structure. Messed-up repos: fit the existing architecture — never attempt a whole-architecture rewrite.
+   - **UI tickets:** before writing UI code, load `modern-web-guidance` and `search` + `retrieve` guides for the interaction/layout you are building; follow the retrieved guide (modern platform APIs, a11y, performance). If the ticket plan cites guide IDs, retrieve those first.
 3. Set Status to `review`. Spawn **`dev-reviewer`** (read-only) on the ticket diff.
 4. If findings: send them back to the same implementer session → fix → reviewer re-reviews. Loop until clean. Max **3 rounds**, then **question tool** with the stuck findings.
 5. Commit on `dev/<feature-slug>` with message = ticket title. Never push unless asked.
 6. Set Status to `done`.
 
-### Final four gates (loop until ALL green)
+### Final gates (loop until ALL green)
 
-Run after every ticket is `done`:
+Run after every ticket is `done`: the four hard gates plus the UI soft gate above. Never report success on a red hard gate.
 
 1. Full test suite green (project’s test command).
 2. Typecheck green (`npm run typecheck` / `tsc --noEmit` / Flutter analyze as applicable).
 3. Fresh whole-diff reviewer (`code-review` skill or `dev-reviewer` on full diff vs base) finds **zero** bugs or scalability issues.
 4. Original wait-what restatement still matches what was built (you verify; if drifted → fix via implementer loop).
+5. **UI/full-stack only:** whole-diff UI review against `modern-web-guidance` — retrieve guides for the areas touched and confirm the diff follows them. Soft gate: if network is unavailable, record `MWG skipped (offline)` in the report instead of blocking.
 
-If any gate fails → return to implementer↔reviewer loop for the failing area → re-run **all four**. Never report success on a red gate.
+If any hard gate fails → return to implementer↔reviewer loop for the failing area → re-run **all gates**. Never report success on a red hard gate. Soft gate (MWG) failures → same fix loop when network allows; otherwise record `MWG skipped (offline)`.
 
 ### Finish (automatic)
 
