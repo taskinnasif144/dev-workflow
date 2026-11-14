@@ -5,7 +5,7 @@ OpenCode plugin that installs the **`/dev`** development pipeline: Phase-0 explo
 ## Install (one command)
 
 ```bash
-opencode plugin add github:YOUR_GITHUB_USERNAME/dev-workflow
+opencode plugin add github:taskinnasif144/dev-workflow
 ```
 
 Then **restart OpenCode once** (agent files are written to `~/.config/opencode/agents/` on first load).
