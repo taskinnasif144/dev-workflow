@@ -1,0 +1,17 @@
+{
+  "name": "opencode-dev-workflow",
+  "version": "1.0.0",
+  "description": "OpenCode plugin: /dev workflow pipeline with subagents and bundled skills",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src",
+    "bundle"
+  ],
+  "dependencies": {
+    "@opencode/plugin": "latest"
+  }
+}
