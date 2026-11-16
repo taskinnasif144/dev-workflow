@@ -56,6 +56,8 @@ npx skills add figma/mcp-server-guide --skill figma-design-to-code -a opencode
 8. Branch `dev/<feature-slug>` → strict red→green implement ↔ read-only review
 9. Four hard gates (tests, typecheck, whole-diff reviewer, restatement match) + UI soft gate (`modern-web-guidance`) → report
 
+**Stuck subagent recovery:** silent implementer (timeout / no report) → 1 limited retry → **auto-slice the ticket** → continue; a slice stuck twice escalates to a question.
+
 ## Editing instructions
 
 Fine-tune anything under `bundle/` on GitHub, push, then run `opencode plugin update` + restart.

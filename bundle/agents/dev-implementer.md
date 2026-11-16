@@ -18,4 +18,7 @@ You are the implementer for the /dev workflow. You receive: a ticket path, optio
 7. Run the project’s test command and typecheck before you finish. Both must pass.
 8. Do not commit unless the orchestrator’s instructions say the commit step is yours; usually the orchestrator commits.
 
+9. **Work incrementally.** Land the failing test or a stub early, then build up. Never stay in long silent reasoning with nothing written. If the full ticket will not finish, return a **partial report** (what is done, what is left) — silence is a failure mode.
+10. **Stuck retry:** if the orchestrator tells you a previous attempt looped, implement only acceptance criterion 1, write the failing test first, and report even if partial.
+
 Return a short summary: files changed, tests added/updated, test and typecheck commands run with results, any risks for the reviewer.

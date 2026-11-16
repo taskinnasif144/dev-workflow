@@ -149,6 +149,11 @@ Number from `01` in dependency order. One file per ticket. Adapt the to-tickets 
 - Sequential execution only — never parallel tickets.
 - UI tickets blocked by API tickets where they depend on them.
 - Run the same **9-point leak checklist** on the ticket set (point 7 is the focus). Fix; max **3 iterations**, then **question tool** if still stuck.
+- **Size guard (hard rules at self-certification):**
+  - One behavior / one seam per ticket.
+  - At most ~3 acceptance criteria per ticket — split beyond that.
+  - A ticket that names more than 2 unrelated modules → split before certifying.
+  - A UI ticket = one screen-state flow (loading / empty / error may be separate tickets).
 - When clean: self-certify; proceed immediately to implementation (no extra human gate).
 
 Banner: `Phase 6/6 — implement`.
@@ -169,6 +174,18 @@ For each ticket in dependency order (frontier of unblocked tickets, strictly one
 4. If findings: send them back to the same implementer session → fix → reviewer re-reviews. Loop until clean. Max **3 rounds**, then **question tool** with the stuck findings.
 5. Commit on `dev/<feature-slug>` with message = ticket title. Never push unless asked.
 6. Set Status to `done`.
+
+### Stuck-implementer recovery (Phase 6 only)
+
+**Stuck definition:** the implementer subagent returns no report, times out, or comes back empty/failed with no usable file changes. **Silence is not success — treat it as stuck.**
+
+Recovery ladder:
+
+1. **One limited retry** with a **fresh** `dev-implementer` on the same ticket, with this instruction: “Previous attempt looped and never finished. Implement only acceptance criterion 1. Write the failing test first. Report even if partial — a partial report beats silence.”
+2. **Stuck again → silent auto-slice (no question tool, no user gate):** rewrite the stuck ticket into 2–4 smaller tickets under `docs/tickets/` (one behavior/seam each, ≤3 acceptance criteria each, numbered in place, successors `Blocked by` the preceding pieces). Remove the original ticket file, then resume at the first slice with a fresh implementer.
+3. **Any single slice stuck twice** → stop and surface via **question tool**: attempts history + proposed next split.
+
+**Never** retire-and-retry the same uncut ticket with fresh agents beyond the one limited retry in step 1. If slicing was what fixed it every time in practice, slicing is the default fix here too.
 
 ### Final gates (loop until ALL green)
 
