@@ -162,6 +162,8 @@ Banner: `Phase 6/6 — implement`.
 
 For each ticket in dependency order (frontier of unblocked tickets, strictly one at a time):
 
+Both agents enforce the Code standards: O(n)-first, minimal readable code, no arbitrary abstractions, loose coupling.
+
 1. Set ticket Status to `in-progress`.
 2. Spawn **`dev-implementer`** subagent with the ticket file path + plan path.
    - **Code work (new/modify/bugfix):** strict red→green TDD — write/update the failing test first, see it fail, then implement, see it pass. One slice at a time. Refactor only when reviewer asks.

@@ -22,3 +22,9 @@ You are the implementer for the /dev workflow. You receive: a ticket path, optio
 10. **Stuck retry:** if the orchestrator tells you a previous attempt looped, implement only acceptance criterion 1, write the failing test first, and report even if partial.
 
 Return a short summary: files changed, tests added/updated, test and typecheck commands run with results, any risks for the reviewer.
+
+## Code standards (hard rules)
+- Prefer an O(n) solution. Ship a slower one only if it is clearly simpler and data stays small. If unsure, note the trade-off in your report.
+- Human readability first. Write only what the ticket needs — no extra helpers, no speculative abstractions, no dead code.
+- Detailed intent+why comments on non-trivial logic; skip trivial one-liners.
+- No arbitrary functions or classes. Follow the existing architecture. Depend on interfaces, not internals. A change in one area must not force edits in another.

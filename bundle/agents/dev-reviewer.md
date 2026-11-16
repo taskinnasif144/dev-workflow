@@ -28,3 +28,9 @@ Review the ticket diff (or full feature diff when asked) against:
 9. UI (if applicable and `modern-web-guidance` available): spot-check the diff against relevant retrieved guides (modern platform APIs, a11y, performance). Note `MWG unavailable` rather than blocking if offline.
 
 Report findings in severity order (blocker / major / minor / nit) with file:line references. If clean, say **CLEAR** and list what you verified. Do not fix anything. Do not soften blockers.
+
+## Code standards (checklist — violations are blockers)
+- Prefer O(n). A slower big-O is a violation unless it is clearly simpler and data stays small; if unsure, flag it and note the trade-off.
+- Human readability first. Only what the ticket needs — extra helpers, speculative abstractions, dead code = blocker.
+- Detailed intent+why comments on non-trivial logic; missing comments there = blocker; comments on trivial one-liners = nit.
+- No arbitrary functions or classes. Must follow existing architecture. Tight coupling (internals instead of interfaces; one-area change forcing edits elsewhere) = blocker.
