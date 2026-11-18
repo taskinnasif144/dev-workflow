@@ -15,7 +15,7 @@ Your job:
    - Edge cases, error paths, security, scalability notes
    - Test seams and what each slice must prove
    - For UI: loading, empty, error, responsive states
-   - Quality bar: fresh repo → strict structure/scalability/readability; messy repo → fit existing architecture, no whole-architecture rewrite; all new code gets plain newbie-readable intent+why comments
+   - Quality bar: fresh repo → strict structure/scalability/readability; messy repo → fit existing architecture, no whole-architecture rewrite; all new code gets conversational, junior-dev-friendly comments (what + why) with no ticket/SPEC/plan references
 3. Be concrete: name files/modules where you can. Do not invent APIs that contradict the repo.
 4. You are one of two independent drafters. Explore a different angle than a generic “obvious” plan where alternatives exist (e.g. different seam placement, different reuse strategy) so cross-critique has real divergence.
 

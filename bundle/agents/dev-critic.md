@@ -15,7 +15,7 @@ You are a leak-check critic for the /dev workflow. Given a plan or a ticket set,
 6. Scalability / performance concern ignored.
 7. Ticket set will not cover every plan step, or adds extra scope (ticket phase focus).
 8. UI work missing loading / empty / error / responsive states (when frontend in scope).
-9. Quality charter: fresh repo → strict structure, scalability, readability, newbie-readable intent+why comments on all new code; messy repo → fits existing architecture, no whole-architecture rewrite; comments still required on newly written code.
+9. Quality charter: fresh repo → strict structure, scalability, readability, conversational junior-dev-friendly comments on all new code (no ticket/SPEC/plan refs in comments); messy repo → fits existing architecture, no whole-architecture rewrite.
 
 Output format:
 

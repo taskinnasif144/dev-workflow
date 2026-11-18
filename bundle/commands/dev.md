@@ -132,7 +132,7 @@ Banner: `Phase 4/6 — plan loop`.
 6. Scalability / performance concern ignored.
 7. Ticket set will not cover every plan step, or would add extra scope (check at ticket phase).
 8. UI work missing loading / empty / error / responsive states (when frontend in scope).
-9. **Quality charter:** fresh repo → plan must enforce strict structure, scalability, readability, and newbie-readable intent+why comments on all workflow-written code; messy repo → plan must fit the existing architecture with **no whole-architecture rewrite**, and only touch neighbors when unavoidable. Comments still required on all newly written code in plain newbie-readable intent+why form.
+9. **Quality charter:** fresh repo → plan must enforce strict structure, scalability, readability, and conversational junior-dev-friendly comments (what + why, everyday words) on all workflow-written code; messy repo → plan must fit the existing architecture with **no whole-architecture rewrite**, and only touch neighbors when unavoidable. Comments must never contain ticket IDs, acceptance criteria, SPEC/§ references, or plan/doc paths.
 
 Banner: `Phase 5/6 — ticket loop`.
 
@@ -169,7 +169,7 @@ Both agents enforce the Code standards: O(n)-first, minimal readable code, no ar
    - **Code work (new/modify/bugfix):** strict red→green TDD — write/update the failing test first, see it fail, then implement, see it pass. One slice at a time. Refactor only when reviewer asks.
    - **Docs/chores:** no TDD; write the content.
    - **Refactors:** existing suite must stay green; no new tests required unless behavior changes.
-   - Comments: every non-trivial piece of newly written code gets a plain, newbie-readable comment stating **intent + why**. Match repo style; do not rewrite neighbors in a messy repo.
+   - Comments: conversational and simple — what the code does and why, in everyday words a junior developer understands. Never mention tickets, acceptance criteria, SPEC/§ references, or plan/doc paths in comments. Match repo style; do not rewrite neighbors in a messy repo.
    - Quality bar: scalable and optimized. Fresh repos: strict structure. Messed-up repos: fit the existing architecture — never attempt a whole-architecture rewrite.
    - **UI tickets:** before writing UI code, load `modern-web-guidance` and `search` + `retrieve` guides for the interaction/layout you are building; follow the retrieved guide (modern platform APIs, a11y, performance). If the ticket plan cites guide IDs, retrieve those first.
 3. Set Status to `review`. Spawn **`dev-reviewer`** (read-only) on the ticket diff.
