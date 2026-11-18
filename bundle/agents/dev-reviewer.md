@@ -1,6 +1,7 @@
 ---
 description: Read-only code reviewer for /dev — reports findings, never edits
 mode: subagent
+model: opencode-go/mimo-v2.6-flash
 permissions:
   - action: edit
     resource: "*"

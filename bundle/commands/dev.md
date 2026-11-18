@@ -1,5 +1,6 @@
 ---
 description: Full dev pipeline — Phase-0 explore, grill requirements, plan with cross-critique, ticket, TDD implement, review, ship
+model: opencode-go/mimo-v2.6-flash
 ---
 
 # /dev — automated development workflow
@@ -112,7 +113,7 @@ Banner: `Phase 4/6 — plan loop`.
 
 ### Steps
 
-1. Spawn **two** `dev-drafter` subagents in parallel. Each drafts a **full unified plan** independently (API + UI together when full-stack). Instruct them to explore different approaches; fresh sessions; do not let them see each other’s work.
+1. Spawn **two** `dev-drafter` subagents in parallel (these run on **mimo-v2.6-pro** via the agent config; their cross-critique rounds use the same Pro sessions). Each drafts a **full unified plan** independently (API + UI together when full-stack). Instruct them to explore different approaches; fresh sessions; do not let them see each other’s work.
 2. Load `cross-critique`. Circulate each draft to the other drafter for structured pros/cons (reuse the same subagent sessions).
 3. Synthesize **one unified plan** yourself from drafts + critiques.
 4. Run the **9-point leak checklist** (below) against the synthesized plan.
